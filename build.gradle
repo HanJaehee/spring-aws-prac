@@ -29,6 +29,9 @@ dependencies {
     testImplementation('org.projectlombok:lombok')
     testAnnotationProcessor('org.projectlombok:lombok')
 
+    //mustache
+    compile('org.springframework.boot:spring-boot-starter-mustache')
+
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
     implementation("org.mariadb.jdbc:mariadb-java-client")
     implementation('com.h2database:h2')
