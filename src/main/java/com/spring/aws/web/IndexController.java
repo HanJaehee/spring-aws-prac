@@ -1,6 +1,7 @@
 package com.spring.aws.web;
 
-import com.spring.aws.domain.posts.PostsRepository;
+import com.spring.aws.config.auth.LoginUser;
+import com.spring.aws.config.auth.dto.SessionUser;
 import com.spring.aws.service.posts.PostsService;
 import com.spring.aws.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
 
 @RequiredArgsConstructor
 @Controller
@@ -26,8 +28,12 @@ public class IndexController {
     }
 
     @GetMapping("/")
-    public String index(Model model){
+    public String index(Model model, @LoginUser SessionUser user){
         model.addAttribute("posts", postsService.findAllDesc());
+
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
         return "index";
     }
 
@@ -38,4 +44,5 @@ public class IndexController {
 
         return "posts-update";
     }
+
 }
